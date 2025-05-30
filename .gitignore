@@ -1,0 +1,108 @@
+# ==============================================
+# .gitignore para proyecto PHP CRUD Inventario
+# ==============================================
+
+# ========== ARCHIVOS DE CONFIGURACIÓN SENSIBLES ==========
+# IMPORTANTE: Estos archivos contienen credenciales y no deben subirse
+config/config.php
+config/conexion.php
+
+
+
+# ========== UPLOADS Y ARCHIVOS DINÁMICOS ==========
+# Los archivos subidos por usuarios no van en el repositorio
+uploads/*
+# Mantener la carpeta pero no su contenido
+!uploads/.gitkeep
+
+# ========== ARCHIVOS TEMPORALES DE PHP ==========
+# Sesiones y archivos temporales
+*.tmp
+*.temp
+*.log
+session_*
+
+# ========== ARCHIVOS DEL SISTEMA OPERATIVO ==========
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.fuse_hidden*
+.Trash-*
+
+# ========== EDITORES E IDEs ==========
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PhpStorm / IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+# ========== DEPENDENCIAS Y LIBRERÍAS ==========
+# Composer (si usas en el futuro)
+vendor/
+composer.lock
+
+# NPM (si agregas frontend tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ========== ARCHIVOS DE BACKUP Y CACHE ==========
+# Backups de base de datos
+*.sql.bak
+*.sql.backup
+backup/
+backups/
+
+# Cache de PHP
+*.cache
+cache/
+temp/
+
+# ========== ARCHIVOS DE TESTING ==========
+# Puedes descomentar si no quieres subir los tests
+# tests/
+# phpunit.xml
+# .phpunit.result.cache
+
+# ========== ARCHIVOS DE ENVIRONMENT ==========
+# Variables de entorno (para proyectos más avanzados)
+.env
+.env.local
+.env.*.local
+
+# ========== ARCHIVOS DE BUILD/DIST ==========
+# Si usas herramientas de build en el futuro
+dist/
+build/
