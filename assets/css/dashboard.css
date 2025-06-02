@@ -1,0 +1,488 @@
+/* ========================================
+   DASHBOARD STYLES - Sistema de Inventario
+   ======================================== */
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    overflow-x: hidden;
+}
+
+/* Container principal */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ========================================
+   SIDEBAR
+   ======================================== */
+.sidebar {
+    width: 240px;
+    background-color: #e3f2fd;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    white-space: nowrap;
+}
+
+.sidebar.collapsed .logo-text {
+    display: none;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #2c3e50;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.sidebar-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Navegación del sidebar */
+.sidebar-nav {
+    padding: 20px 0;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: #2c3e50;
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+    white-space: nowrap;
+}
+
+.nav-item:hover {
+    background-color: rgba(41, 128, 185, 0.1);
+}
+
+.nav-item.active {
+    background-color: #2980b9;
+    color: white;
+}
+
+.nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #1a5490;
+}
+
+.nav-icon {
+    font-size: 20px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.nav-text {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.sidebar.collapsed .nav-text {
+    display: none;
+}
+
+.sidebar.collapsed .nav-item {
+    justify-content: center;
+    padding: 12px 0;
+}
+
+/* Tooltips para sidebar colapsado */
+.sidebar.collapsed .nav-item:hover::after {
+    content: attr(title);
+    position: absolute;
+    left: 70px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+/* ========================================
+   MAIN CONTENT
+   ======================================== */
+.main-content {
+    flex: 1;
+    margin-left: 240px;
+    transition: margin-left 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.main-content.expanded {
+    margin-left: 70px;
+}
+
+/* Header principal */
+.main-header {
+    background-color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.header-left h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #6c757d;
+    font-size: 16px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* Búsqueda */
+.search-box {
+    position: relative;
+    width: 300px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 25px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #2980b9;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+/* Notificaciones */
+.notifications {
+    position: relative;
+    cursor: pointer;
+}
+
+.notification-icon {
+    font-size: 20px;
+    color: #6c757d;
+}
+
+/* Perfil de usuario */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 25px;
+    transition: background 0.2s;
+}
+
+.user-profile:hover {
+    background-color: #f8f9fa;
+}
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #e9ecef;
+}
+
+.user-name {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.dropdown-arrow {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/* ========================================
+   DASHBOARD CONTENT
+   ======================================== */
+.dashboard-content {
+    padding: 30px;
+}
+
+/* Sección de listas */
+.lists-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.list-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.list-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.view-all {
+    color: #2980b9;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+
+/* Tablas */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.data-table th {
+    font-weight: 600;
+    color: #6c757d;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.data-table td {
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.product-thumb {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.placeholder-img {
+    width: 40px;
+    height: 40px;
+    background-color: #f1f3f5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.text-center {
+    text-align: center;
+    color: #6c757d;
+}
+
+/* ========================================
+   ESTADÍSTICAS
+   ======================================== */
+.stats-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.stats-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stats-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 24px;
+}
+
+.stat-icon.orange {
+    background-color: #fff3e0;
+    color: #ff9800;
+}
+
+.stat-icon.purple {
+    background-color: #f3e5f5;
+    color: #9c27b0;
+}
+
+.stat-icon.blue {
+    background-color: #e3f2fd;
+    color: #2196f3;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 1200px) {
+    .lists-section,
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .header-right {
+        gap: 15px;
+    }
+    
+    .search-box {
+        width: 200px;
+    }
+    
+    .user-name {
+        display: none;
+    }
+    
+    .dashboard-content {
+        padding: 20px;
+    }
+}
