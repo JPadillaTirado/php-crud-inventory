@@ -250,9 +250,10 @@ body {
     align-items: center;
     gap: 10px;
     cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 25px;
+    padding: 8px 12px;
+    border-radius: 8px;
     transition: background 0.2s;
+    position: relative;
 }
 
 .user-profile:hover {
@@ -264,17 +265,124 @@ body {
     height: 35px;
     border-radius: 50%;
     object-fit: cover;
-    background-color: #e9ecef;
+    border: 2px solid #e9ecef;
 }
 
 .user-name {
     font-weight: 500;
-    font-size: 14px;
+    color: #2c3e50;
 }
 
 .dropdown-arrow {
     font-size: 12px;
     color: #6c757d;
+    transition: transform 0.2s;
+}
+
+.user-profile:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Menú desplegable del usuario */
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    min-width: 280px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border: 1px solid #e9ecef;
+}
+
+.user-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    border-bottom: 1px solid #e9ecef;
+    background-color: #f8f9fa;
+    border-radius: 12px 12px 0 0;
+}
+
+.dropdown-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e9ecef;
+}
+
+.dropdown-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dropdown-name {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.dropdown-email {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.dropdown-menu {
+    padding: 8px 0;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: #2c3e50;
+    text-decoration: none;
+    transition: background 0.2s;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #2980b9;
+}
+
+.dropdown-icon {
+    font-size: 16px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive para el menú desplegable */
+@media (max-width: 768px) {
+    .user-dropdown {
+        right: -20px;
+        min-width: 250px;
+    }
+    
+    .dropdown-header {
+        padding: 15px;
+    }
+    
+    .dropdown-item {
+        padding: 10px 15px;
+    }
 }
 
 /* ========================================
