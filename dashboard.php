@@ -59,7 +59,6 @@ $categorias = $conexion->query($sql_categorias);
                 </div>
                 <button class="sidebar-toggle" id="sidebarToggle">☰</button>
             </div>
-            
             <nav class="sidebar-nav">
                 <a href="dashboard.php" class="nav-item active">
                     <span class="nav-icon">🏠</span>
@@ -95,7 +94,6 @@ $categorias = $conexion->query($sql_categorias);
                 </a>
             </nav>
         </aside>
-
         <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
@@ -119,7 +117,6 @@ $categorias = $conexion->query($sql_categorias);
                     </div>
                 </div>
             </header>
-
             <!-- Dashboard Content -->
             <div class="dashboard-content">
                 <!-- Product and Category Lists -->
@@ -163,7 +160,6 @@ $categorias = $conexion->query($sql_categorias);
                             </tbody>
                         </table>
                     </div>
-
                     <!-- Categories List -->
                     <div class="list-card">
                         <div class="list-header">
@@ -198,7 +194,6 @@ $categorias = $conexion->query($sql_categorias);
                         </table>
                     </div>
                 </div>
-
                 <!-- Statistics Section -->
                 <div class="stats-section">
                     <!-- Products Stats -->
@@ -217,7 +212,6 @@ $categorias = $conexion->query($sql_categorias);
                             </div>
                         </div>
                     </div>
-
                     <!-- Providers Stats -->
                     <div class="stats-card">
                         <h3>Resumen de proveedores</h3>
@@ -238,26 +232,95 @@ $categorias = $conexion->query($sql_categorias);
             </div>
         </main>
     </div>
-
     <script>
-        // Toggle sidebar
-        document.getElementById('sidebarToggle').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('collapsed');
-            document.querySelector('.main-content').classList.toggle('expanded');
-            
-            // Guardar estado en localStorage
-            const isCollapsed = document.getElementById('sidebar').classList.contains('collapsed');
-            localStorage.setItem('sidebarCollapsed', isCollapsed);
-        });
-
-        // Restaurar estado del sidebar
-        window.addEventListener('DOMContentLoaded', function() {
-            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
-            if (isCollapsed) {
-                document.getElementById('sidebar').classList.add('collapsed');
-                document.querySelector('.main-content').classList.add('expanded');
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const mainContent = document.querySelector('.main-content');
+    // Función para alternar el sidebar
+    function toggleSidebar() {
+        sidebar.classList.toggle('collapsed');
+        // Actualizar la clase del contenido principal
+        if (sidebar.classList.contains('collapsed')) {
+            mainContent.classList.add('expanded');
+        } else {
+            mainContent.classList.remove('expanded');
+        }
+        // Guardar el estado en localStorage
+        const isCollapsed = sidebar.classList.contains('collapsed');
+        localStorage.setItem('sidebarCollapsed', isCollapsed);
+        // Disparar un evento personalizado para que otros componentes puedan reaccionar
+        window.dispatchEvent(new Event('sidebarToggled'));
+    }
+    // Event listener para el botón de toggle
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', toggleSidebar);
+    }
+    // Restaurar el estado del sidebar desde localStorage
+    const savedState = localStorage.getItem('sidebarCollapsed');
+    if (savedState === 'true') {
+        sidebar.classList.add('collapsed');
+        mainContent.classList.add('expanded');
+    }
+    // Manejo del sidebar en dispositivos móviles
+    let touchStartX = 0;
+    let touchEndX = 0;
+    // Detectar swipe en móviles para abrir/cerrar el sidebar
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    document.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    function handleSwipe() {
+        // Swipe derecha para abrir
+        if (touchEndX > touchStartX + 50 && sidebar.classList.contains('collapsed')) {
+            toggleSidebar();
+        }
+        // Swipe izquierda para cerrar
+        if (touchEndX < touchStartX - 50 && !sidebar.classList.contains('collapsed')) {
+            toggleSidebar();
+        }
+    }
+    // Cerrar sidebar al hacer clic fuera en móviles
+    if (window.innerWidth <= 768) {
+        document.addEventListener('click', function(e) {
+            const isClickInsideSidebar = sidebar.contains(e.target);
+            const isClickOnToggle = sidebarToggle.contains(e.target);
+            if (!isClickInsideSidebar && !isClickOnToggle && !sidebar.classList.contains('collapsed')) {
+                toggleSidebar();
             }
         });
+    }
+    // Ajustar el sidebar según el tamaño de la ventana
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.add('collapsed');
+                mainContent.classList.add('expanded');
+            }
+        }, 250);
+    });
+});
+
+// Función para actualizar el elemento activo del menú
+function setActiveMenuItem() {
+    const currentPath = window.location.pathname;
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        const href = item.getAttribute('href');
+        if (href && currentPath.includes(href.replace('../', '').replace('../../', ''))) {
+            item.classList.add('active');
+        }
+    });
+}
+
+// Ejecutar al cargar la página
+setActiveMenuItem();
     </script>
 </body>
 </html>
