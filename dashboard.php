@@ -2,6 +2,11 @@
 // Incluir archivos de configuración y conexión
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/config/conexion.php';
+require_once __DIR__ . '/config/auth.php'; // Agregar verificación de autenticación
+
+// Obtener información del usuario logueado
+$usuario_actual = getUsuarioLogueado();
+$nombre_completo = getNombreCompleto();
 
 // Verificar si la conexión está establecida
 if (!isset($conexion)) {
@@ -99,7 +104,7 @@ $categorias = $conexion->query($sql_categorias);
             <!-- Header -->
             <header class="main-header">
                 <div class="header-left">
-                    <h1>Hola Jorge 👋🏼</h1>
+                    <h1>Hola <?php echo $nombre_completo; ?> 👋🏼</h1>
                     <p class="subtitle">Buen día</p>
                 </div>
                 <div class="header-right">
@@ -110,10 +115,31 @@ $categorias = $conexion->query($sql_categorias);
                     <div class="notifications">
                         <span class="notification-icon">🔔</span>
                     </div>
-                    <div class="user-profile">
-                        <img src="assets/img/user-avatar.php?name=Jorge+Padilla" alt="Jorge P." class="user-avatar">
-                        <span class="user-name">Jorge P.</span>
+                    <div class="user-profile" id="userProfile">
+                        <img src="assets/img/user-avatar.php?name=<?php echo urlencode($nombre_completo); ?>" alt="<?php echo htmlspecialchars($nombre_completo); ?>" class="user-avatar">
+                        <span class="user-name"><?php echo htmlspecialchars($nombre_completo); ?></span>
                         <span class="dropdown-arrow">▼</span>
+                        
+                        <!-- Menú desplegable del usuario -->
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-header">
+                                <img src="assets/img/user-avatar.php?name=<?php echo urlencode($nombre_completo); ?>" alt="<?php echo htmlspecialchars($nombre_completo); ?>" class="dropdown-avatar">
+                                <div class="dropdown-user-info">
+                                    <span class="dropdown-name"><?php echo htmlspecialchars($nombre_completo); ?></span>
+                                    <span class="dropdown-email"><?php echo htmlspecialchars($usuario_actual['email']); ?></span>
+                                </div>
+                            </div>
+                            <div class="dropdown-menu">
+                                <a href="views/usuarios/usuario_editar.php?id=<?php echo $usuario_actual['id']; ?>" class="dropdown-item">
+                                    <span class="dropdown-icon">👤</span>
+                                    Mi Perfil
+                                </a>
+                                <a href="controllers/logout.php" class="dropdown-item">
+                                    <span class="dropdown-icon">🚪</span>
+                                    Cerrar Sesión
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -321,6 +347,31 @@ function setActiveMenuItem() {
 
 // Ejecutar al cargar la página
 setActiveMenuItem();
+
+        // Menú desplegable del usuario
+        const userProfile = document.getElementById('userProfile');
+        const userDropdown = document.getElementById('userDropdown');
+
+        if (userProfile && userDropdown) {
+            userProfile.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userDropdown.classList.toggle('active');
+            });
+
+            // Cerrar menú al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!userProfile.contains(e.target)) {
+                    userDropdown.classList.remove('active');
+                }
+            });
+
+            // Cerrar menú con ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    userDropdown.classList.remove('active');
+                }
+            });
+        }
     </script>
 </body>
 </html>

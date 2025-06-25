@@ -21,6 +21,7 @@ uploads/*
 *.temp
 *.log
 session_*
+LOGIN_README.md
 
 # ========== ARCHIVOS DEL SISTEMA OPERATIVO ==========
 # Windows

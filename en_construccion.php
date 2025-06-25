@@ -1,6 +1,8 @@
 <?php
 // Incluir archivo de configuración
 require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/config/conexion.php';
+require_once __DIR__ . '/config/auth.php'; // Agregar verificación de autenticación
 
 // Obtener el módulo solicitado desde la URL
 $modulo = isset($_GET['modulo']) ? $_GET['modulo'] : 'Página';
