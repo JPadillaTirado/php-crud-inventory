@@ -79,6 +79,16 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# ========== ARCHIVOS NO IMPORTANTES DE LA LIBRERIA FPDF ==========
+C:/xampp/htdocs/php-crud-inventory/fpdf/doc/*
+C:/xampp/htdocs/php-crud-inventory/fpdf/font/*
+C:/xampp/htdocs/php-crud-inventory/fpdf/makefont/*
+C:/xampp/htdocs/php-crud-inventory/fpdf/tutorial/*
+C:/xampp/htdocs/php-crud-inventory/fpdf/changelog.htm
+C:/xampp/htdocs/php-crud-inventory/fpdf/FAQ.htm
+C:/xampp/htdocs/php-crud-inventory/fpdf/install.txt
+C:/xampp/htdocs/php-crud-inventory/fpdf/license.txt
+
 # ========== ARCHIVOS DE BACKUP Y CACHE ==========
 # Backups de base de datos
 *.sql.bak
@@ -107,3 +117,5 @@ temp/
 # Si usas herramientas de build en el futuro
 dist/
 build/
+
+fpdf/
