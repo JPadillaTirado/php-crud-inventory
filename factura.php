@@ -3,7 +3,10 @@
 
 // Inicia la sesión. Es crucial para guardar los productos de la factura.
 session_start();
-require 'conexion.php';
+require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/config/conexion.php';
+//require_once __DIR__ . '/config/auth.php';
+//require 'conexion.php';
 
 // --- LÓGICA DE PROCESAMIENTO ---
 
@@ -89,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Obtenemos todos los productos de la BD para el menú desplegable
-$productos_disponibles = $conexion->query("SELECT id, nombre, stock FROM productos WHERE stock > 0");
+$productos_disponibles = $conexion->query("SELECT producto_id, producto_nombre, producto_stock FROM producto WHERE producto_stock > 0");
 
 ?>
 <!DOCTYPE html>

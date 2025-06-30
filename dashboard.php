@@ -43,6 +43,75 @@ $sql_categorias = "SELECT c.*, COUNT(p.producto_id) as total_productos
                    GROUP BY c.categoria_id
                    ORDER BY c.categoria_nombre ASC";
 $categorias = $conexion->query($sql_categorias);
+
+// === INICIO LÓGICA FACTURACIÓN ===
+if (isset($_GET['seccion']) && $_GET['seccion'] === 'factura') {
+    // Iniciar sesión si no está iniciada
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    // Asegurar conexión
+    if (!isset($conexion)) {
+        require_once __DIR__ . '/config/conexion.php';
+    }
+    // Procesamiento de acciones de factura
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST['accion']) && $_POST['accion'] == 'agregar') {
+            $id_producto = $_POST['producto_id'];
+            $cantidad = $_POST['cantidad'];
+            $impuesto = 19; // Impuesto fijo
+            $stmt = $conexion->prepare("SELECT producto_nombre as nombre, producto_precio as precio, producto_stock as stock FROM producto WHERE producto_id = ?");
+            $stmt->bind_param("i", $id_producto);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            $producto = $resultado->fetch_assoc();
+            if ($producto && $cantidad <= $producto['stock']) {
+                $item = [
+                    "id" => $id_producto,
+                    "nombre" => $producto['nombre'],
+                    "precio" => $producto['precio'],
+                    "cantidad" => $cantidad,
+                    "impuesto" => $impuesto
+                ];
+                $_SESSION['factura_items'][] = $item;
+            } else {
+                echo "<script>alert('No hay stock suficiente para este producto.');</script>";
+            }
+        }
+        if (isset($_POST['accion']) && $_POST['accion'] == 'finalizar') {
+            $identificacion_cliente = $_POST['identificacion_cliente'];
+            if (!empty($identificacion_cliente) && !empty($_SESSION['factura_items'])) {
+                $total_factura = 0;
+                foreach ($_SESSION['factura_items'] as $item) {
+                    $subtotal = $item['precio'] * $item['cantidad'];
+                    $total_factura += $subtotal + ($subtotal * ($item['impuesto'] / 100));
+                }
+                $stmt = $conexion->prepare("INSERT INTO facturas (identificacion_cliente, total) VALUES (?, ?)");
+                $stmt->bind_param("sd", $identificacion_cliente, $total_factura);
+                $stmt->execute();
+                $id_factura = $conexion->insert_id;
+                foreach ($_SESSION['factura_items'] as $item) {
+                    $stmt_detalle = $conexion->prepare("INSERT INTO detalle_factura (id_factura, id_producto, cantidad, precio_unitario, impuesto) VALUES (?, ?, ?, ?, ?)");
+                    $stmt_detalle->bind_param("iiidd", $id_factura, $item['id'], $item['cantidad'], $item['precio'], $item['impuesto']);
+                    $stmt_detalle->execute();
+                    $stmt_stock = $conexion->prepare("UPDATE producto SET producto_stock = producto_stock - ? WHERE producto_id = ?");
+                    $stmt_stock->bind_param("ii", $item['cantidad'], $item['id']);
+                    $stmt_stock->execute();
+                }
+                unset($_SESSION['factura_items']);
+                header("Location: generar_pdf.php?id_factura=" . $id_factura);
+                exit();
+            } else {
+                echo "<script>alert('Asegúrate de ingresar la identificación del cliente y agregar al menos un producto.');</script>";
+            }
+        }
+        if (isset($_POST['accion']) && $_POST['accion'] == 'cancelar') {
+            unset($_SESSION['factura_items']);
+        }
+    }
+    $productos_disponibles = $conexion->query("SELECT producto_id as id, producto_nombre as nombre, producto_stock as stock FROM producto WHERE producto_stock > 0");
+}
+// === FIN LÓGICA FACTURACIÓN ===
 ?>
 
 <!DOCTYPE html>
@@ -72,6 +141,10 @@ $categorias = $conexion->query($sql_categorias);
                 <a href="views/productos/producto_listar.php" class="nav-item">
                     <span class="nav-icon">📦</span>
                     <span class="nav-text">Productos</span>
+                </a>
+                <a href="dashboard.php?seccion=factura" class="nav-item">
+                    <span class="nav-icon">🧾</span>
+                    <span class="nav-text">Facturación</span>
                 </a>
                 <a href="en_construccion.php" class="nav-item">
                     <span class="nav-icon">⚙️</span>
@@ -145,6 +218,9 @@ $categorias = $conexion->query($sql_categorias);
             </header>
             <!-- Dashboard Content -->
             <div class="dashboard-content">
+                <?php if (isset($_GET['seccion']) && $_GET['seccion'] === 'factura'): ?>
+                    <iframe src="factura.php" style="width:100%;min-height:800px;border:none;background:white"></iframe>
+                <?php else: ?>
                 <!-- Product and Category Lists -->
                 <div class="lists-section">
                     <!-- Products List -->
@@ -255,6 +331,7 @@ $categorias = $conexion->query($sql_categorias);
                         </div>
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
         </main>
     </div>
