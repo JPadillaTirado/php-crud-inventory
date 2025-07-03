@@ -219,7 +219,35 @@ if (isset($_GET['seccion']) && $_GET['seccion'] === 'factura') {
             <!-- Dashboard Content -->
             <div class="dashboard-content">
                 <?php if (isset($_GET['seccion']) && $_GET['seccion'] === 'factura'): ?>
-                    <iframe src="factura.php" style="width:100%;min-height:800px;border:none;background:white"></iframe>
+                    <!-- Sección de Facturación -->
+                    <div class="facturacion-section">
+                        <div class="section-header">
+                            <h2>Sistema de Facturación</h2>
+                            <p>Gestiona las facturas y genera PDFs de ventas</p>
+                        </div>
+                        
+                        <div class="facturacion-cards">
+                            <div class="facturacion-card">
+                                <div class="card-icon">🧾</div>
+                                <h3>Nueva Factura</h3>
+                                <p>Crea una nueva factura agregando productos y finalizando la venta</p>
+                                <a href="factura.php" class="btn btn-primary">Crear Factura</a>
+                            </div>
+                            
+                            <div class="facturacion-card">
+                                <div class="card-icon">📋</div>
+                                <h3>Gestionar Facturas</h3>
+                                <p>Consulta, busca y genera PDFs de facturas existentes</p>
+                                <a href="facturas_listar.php" class="btn btn-success">Ver Facturas</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Vista previa de facturación -->
+                        <div class="facturacion-preview">
+                            <h3>Vista Previa de Facturación</h3>
+                            <iframe src="factura.php" style="width:100%;height:600px;border:1px solid #ddd;border-radius:8px;background:white"></iframe>
+                        </div>
+                    </div>
                 <?php else: ?>
                 <!-- Product and Category Lists -->
                 <div class="lists-section">
