@@ -350,13 +350,6 @@ $total_productos = $resultado_productos->fetch_assoc()['total_productos'];
         <main class="main-content" id="mainContent">
             <!-- Header de la página -->
             <div class="categorias-header">
-                <div class="breadcrumb">
-                    <a href="../../dashboard.php">Dashboard</a>
-                    <span>/</span>
-                    <a href="categoria_listar.php">Categorías</a>
-                    <span>/</span>
-                    <span>Editar</span>
-                </div>
                 <h1 style="font-size: 28px; font-weight: 600; margin-bottom: 5px;">
                     <span style="margin-right: 10px;">✏️</span>Editar Categoría
                     <span class="category-id-badge">ID: <?php echo $categoria_id; ?></span>
@@ -399,7 +392,7 @@ $total_productos = $resultado_productos->fetch_assoc()['total_productos'];
                                 <span style="margin-right: 5px;">🏷️</span>Nombre de la Categoría:
                             </label>
                             <div class="input-group">
-                                <span class="input-icon">📝</span>
+                                <span class="input-icon"></span>
                                 <input type="text" 
                                        id="nombre" 
                                        name="nombre" 
@@ -416,7 +409,7 @@ $total_productos = $resultado_productos->fetch_assoc()['total_productos'];
                                 <span style="margin-right: 5px;">📍</span>Ubicación Física:
                             </label>
                             <div class="input-group">
-                                <span class="input-icon">📍</span>
+                                <span class="input-icon"></span>
                                 <input type="text" 
                                        id="ubicacion" 
                                        name="ubicacion" 
