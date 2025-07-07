@@ -2,7 +2,7 @@
 // Incluir archivos de configuración y conexión
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/conexion.php';
-require_once __DIR__ . '/config/auth.php'; // Agregar verificación de autenticación
+require_once __DIR__ . '/../config/auth.php'; // Agregar verificación de autenticación
 
 // Verificar si la conexión está establecida
 if (!isset($conexion)) {
