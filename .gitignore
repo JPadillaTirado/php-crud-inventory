@@ -79,6 +79,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# ========== ARCHIVOS NO IMPORTANTES DE LA LIBRERIA FPDF ==========
+fpdf/
+
 # ========== ARCHIVOS DE BACKUP Y CACHE ==========
 # Backups de base de datos
 *.sql.bak
