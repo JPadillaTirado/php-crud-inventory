@@ -43,3 +43,24 @@ COLLATE='utf8mb3_general_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=2
 ;
+
+
+-- Tabla para guardar la información general de cada factura
+CREATE TABLE facturas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  identificacion_cliente VARCHAR(50) NOT NULL,
+  fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  total DECIMAL(10, 2) NOT NULL
+);
+
+-- Tabla para guardar cada producto vendido en una factura
+CREATE TABLE detalle_factura (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_factura INT NOT NULL,
+  id_producto INT NOT NULL,
+  cantidad INT NOT NULL,
+  precio_unitario DECIMAL(10, 2) NOT NULL,
+  impuesto DECIMAL(5, 2) NOT NULL
+);
+
+ALTER TABLE producto ADD producto_impuesto INT(2);
