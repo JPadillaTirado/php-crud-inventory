@@ -178,7 +178,7 @@ if (isset($_GET['seccion']) && $_GET['seccion'] === 'factura') {
                     <span class="nav-icon">📦</span>
                     <span class="nav-text">Productos</span>
                 </a>
-                <a href="producto_listar.php?seccion=factura" class="nav-item">
+                <a href="../../facturas_listar.php" class="nav-item" title="Facturación">
                     <span class="nav-icon">🧾</span>
                     <span class="nav-text">Facturación</span>
                 </a>

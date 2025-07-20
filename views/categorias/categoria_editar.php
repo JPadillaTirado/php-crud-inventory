@@ -319,6 +319,10 @@ $total_productos = $resultado_productos->fetch_assoc()['total_productos'];
                     <span class="nav-icon">📦</span>
                     <span class="nav-text">Productos</span>
                 </a>
+                <a href="../../facturas_listar.php" class="nav-item">
+                    <span class="nav-icon">🧾</span>
+                    <span class="nav-text">Facturación</span>
+                </a>
                 <a href="../../en_construccion.php?modulo=configuraciones" class="nav-item" title="Configuraciones">
                     <span class="nav-icon">⚙️</span>
                     <span class="nav-text">Configuraciones</span>

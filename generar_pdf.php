@@ -134,12 +134,12 @@ try {
     
     // Información de la empresa
     $pdf->SetFont('Arial', 'B', 14);
-    $pdf->Cell(0, 8, 'EMPRESA EJEMPLO S.A.S.', 0, 1, 'L');
+    $pdf->Cell(0, 8, utf8_decode('EMPRESA EJEMPLO S.A.S.'), 0, 1, 'L');
     $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell(0, 5, 'Dirección: Calle 123 # 45-67', 0, 1, 'L');
-    $pdf->Cell(0, 5, 'Teléfono: (57) 1 234 5678', 0, 1, 'L');
-    $pdf->Cell(0, 5, 'Email: info@empresa.com', 0, 1, 'L');
-    $pdf->Cell(0, 5, 'NIT: 900.123.456-7', 0, 1, 'L');
+    $pdf->Cell(0, 5, utf8_decode('Dirección: Calle 123 # 45-67'), 0, 1, 'L');
+    $pdf->Cell(0, 5, utf8_decode('Teléfono: (57) 1 234 5678'), 0, 1, 'L');
+    $pdf->Cell(0, 5, utf8_decode('Email: info@empresa.com'), 0, 1, 'L');
+    $pdf->Cell(0, 5, utf8_decode('NIT: 900.123.456-7'), 0, 1, 'L');
     $pdf->Ln(10);
 
     // Información de la factura
@@ -171,12 +171,12 @@ try {
     $w_impuesto = 20;
     $w_subtotal = 30;
     
-    $pdf->Cell($w_codigo, 8, 'CÓDIGO', 1, 0, 'C', true);
-    $pdf->Cell($w_producto, 8, 'PRODUCTO', 1, 0, 'C', true);
-    $pdf->Cell($w_cantidad, 8, 'CANT.', 1, 0, 'C', true);
-    $pdf->Cell($w_precio, 8, 'PRECIO UNIT.', 1, 0, 'C', true);
-    $pdf->Cell($w_impuesto, 8, 'IMPUESTO', 1, 0, 'C', true);
-    $pdf->Cell($w_subtotal, 8, 'SUBTOTAL', 1, 1, 'C', true);
+    $pdf->Cell($w_codigo, 8, utf8_decode('CÓDIGO'), 1, 0, 'C', true);
+    $pdf->Cell($w_producto, 8, utf8_decode('PRODUCTO'), 1, 0, 'C', true);
+    $pdf->Cell($w_cantidad, 8, utf8_decode('CANT.'), 1, 0, 'C', true);
+    $pdf->Cell($w_precio, 8, utf8_decode('PRECIO UNIT.'), 1, 0, 'C', true);
+    $pdf->Cell($w_impuesto, 8, utf8_decode('IMPUESTO'), 1, 0, 'C', true);
+    $pdf->Cell($w_subtotal, 8, utf8_decode('SUBTOTAL'), 1, 1, 'C', true);
     
     // Contenido de la tabla
     $pdf->SetFont('Arial', '', 9);
@@ -229,8 +229,8 @@ try {
     // Información adicional
     $pdf->Ln(10);
     $pdf->SetFont('Arial', 'I', 9);
-    $pdf->Cell(0, 5, 'Gracias por su compra. Este documento es una representación impresa de una factura electrónica.', 0, 1, 'C');
-    $pdf->Cell(0, 5, 'Para consultas o soporte técnico, contacte a soporte@empresa.com', 0, 1, 'C');
+    $pdf->Cell(0, 5, utf8_decode('Gracias por su compra. Este documento es una representación impresa de una factura electrónica.'), 0, 1, 'C');
+    $pdf->Cell(0, 5, utf8_decode('Para consultas o soporte técnico, contacte a soporte@empresa.com'), 0, 1, 'C');
     
     // Generar nombre del archivo
     $nombre_archivo = 'factura_' . str_pad($id_factura, 6, '0', STR_PAD_LEFT) . '_' . date('Y-m-d') . '.pdf';
