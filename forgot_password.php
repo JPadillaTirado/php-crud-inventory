@@ -6,14 +6,15 @@
  * enviado a su correo electrónico registrado
  */
 
-session_start();
-
-// Incluir archivos necesarios
+// 1. PRIMERO: Incluir configuraciones ANTES de iniciar sesión
 require_once 'config/config.php';
 require_once 'config/conexion.php';
 require_once 'config/email_config.php';
 require_once 'includes/password_reset_functions.php';
 require_once 'includes/EmailSender.php';
+
+// 2. DESPUÉS: Iniciar sesión (después de configurar las opciones de sesión)
+session_start();
 
 $mensaje = '';
 $tipo_mensaje = '';
