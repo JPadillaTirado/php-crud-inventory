@@ -462,7 +462,7 @@ $usuario_recordado = $_COOKIE['recordar_usuario'] ?? '';
                         >
                         <label for="recordar" class="checkbox-label">Recuérdame</label>
                     </div>
-                    <a href="#" class="forgot-link" onclick="alert('Funcionalidad próximamente disponible');">¿Olvidaste tu contraseña?</a>
+                    <a href="forgot_password.php" class="forgot-link">¿Olvidaste tu contraseña?</a>
                 </div>
 
                 <button type="submit" class="login-button">

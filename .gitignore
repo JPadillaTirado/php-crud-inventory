@@ -6,6 +6,7 @@
 # IMPORTANTE: Estos archivos contienen credenciales y no deben subirse
 config/config.php
 config/conexion.php
+config/email_config.php
 
 
 
