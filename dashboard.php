@@ -91,7 +91,7 @@ $categorias = $conexion->query($sql_categorias);
                 </a>
                 <a href="en_construccion.php" class="nav-item">
                     <span class="nav-icon">📋</span>
-                    <span class="nav-text">Pedidos</span>
+                    <span class="nav-text">Compras</span>
                 </a>
                 <a href="views/categorias/categoria_listar.php" class="nav-item">
                     <span class="nav-icon">📁</span>

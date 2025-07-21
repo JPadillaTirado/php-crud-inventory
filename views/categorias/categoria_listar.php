@@ -182,9 +182,9 @@ $resultado = $conexion->query($sql);
                     <span class="nav-icon">🏢</span>
                     <span class="nav-text">Proveedores</span>
                 </a>
-                <a href="../../en_construccion.php?modulo=pedidos" class="nav-item" title="Pedidos">
+                <a href="../../en_construccion.php?modulo=Compras" class="nav-item" title="Compras">
                     <span class="nav-icon">📋</span>
-                    <span class="nav-text">Pedidos</span>
+                    <span class="nav-text">Compras</span>
                 </a>
                 <a href="categoria_listar.php" class="nav-item active" title="Categorías">
                     <span class="nav-icon">📁</span>
