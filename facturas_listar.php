@@ -506,12 +506,12 @@ try {
                     <span class="nav-icon">👥</span>
                     <span class="nav-text">Usuarios</span>
                 </a>
-                <a href="en_construccion.php?modulo=proveedores" class="nav-item" title="Proveedores">
+                <a href="views/proveedores/proveedor_listar.php" class="nav-item">
                     <span class="nav-icon">🏢</span>
                     <span class="nav-text">Proveedores</span>
                 </a>
-                <a href="en_construccion.php?modulo=Compras" class="nav-item" title="Compras">
-                    <span class="nav-icon">📋</span>
+                <a href="views/compras/compra_listar.php" class="nav-item">
+                    <span class="nav-icon">🛒</span>
                     <span class="nav-text">Compras</span>
                 </a>
                 <a href="views/categorias/categoria_listar.php" class="nav-item" title="Categorías">

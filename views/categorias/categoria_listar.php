@@ -178,12 +178,12 @@ $resultado = $conexion->query($sql);
                     <span class="nav-icon">👥</span>
                     <span class="nav-text">Usuarios</span>
                 </a>
-                <a href="../../en_construccion.php?modulo=proveedores" class="nav-item" title="Proveedores">
+                <a href="../proveedores/proveedor_listar.php" class="nav-item">
                     <span class="nav-icon">🏢</span>
                     <span class="nav-text">Proveedores</span>
                 </a>
-                <a href="../../en_construccion.php?modulo=Compras" class="nav-item" title="Compras">
-                    <span class="nav-icon">📋</span>
+                <a href="../compras/compra_listar.php" class="nav-item">
+                    <span class="nav-icon">🛒</span>
                     <span class="nav-text">Compras</span>
                 </a>
                 <a href="categoria_listar.php" class="nav-item active" title="Categorías">
@@ -278,11 +278,12 @@ $resultado = $conexion->query($sql);
                                         </td>
                                         <td class="acciones" style="text-align: right;">
                                             <a href="categoria_editar.php?id=<?php echo $categoria['categoria_id']; ?>" 
-                                               class="btn-small" title="Editar categoría">
+                                               class="btn btn-small btn-warning" 
+                                               title="Editar categoría">
                                                 <span style="margin-right: 5px;">✏️</span> Editar
                                             </a>
                                             <a href="categoria_eliminar.php?id=<?php echo $categoria['categoria_id']; ?>" 
-                                               class="btn-small btn-danger" title="Eliminar categoría"
+                                               class="btn btn-small btn-danger" title="Eliminar categoría"
                                                onclick="return confirm('¿Está seguro que desea eliminar esta categoría?');">
                                                 <span style="margin-right: 5px;">🗑️</span> Eliminar
                                             </a>
@@ -291,7 +292,6 @@ $resultado = $conexion->query($sql);
                                 <?php endwhile; ?>
                             </tbody>
                         </table>
-
                         <!-- Paginación -->
                         <?php if ($total_paginas > 1): ?>
                             <div class="paginacion">

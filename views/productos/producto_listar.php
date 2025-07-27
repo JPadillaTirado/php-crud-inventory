@@ -190,12 +190,12 @@ if (isset($_GET['seccion']) && $_GET['seccion'] === 'factura') {
                     <span class="nav-icon">👥</span>
                     <span class="nav-text">Usuarios</span>
                 </a>
-                <a href="../../en_construccion.php?modulo=proveedores" class="nav-item" title="Proveedores">
+                <a href="../proveedores/proveedor_listar.php" class="nav-item">
                     <span class="nav-icon">🏢</span>
                     <span class="nav-text">Proveedores</span>
                 </a>
-                <a href="../../en_construccion.php?modulo=Compras" class="nav-item" title="Compras">
-                    <span class="nav-icon">📋</span>
+                <a href="../compras/compra_listar.php" class="nav-item">
+                    <span class="nav-icon">🛒</span>
                     <span class="nav-text">Compras</span>
                 </a>
                 <a href="../categorias/categoria_listar.php" class="nav-item" title="Categorías">
@@ -268,9 +268,9 @@ if (isset($_GET['seccion']) && $_GET['seccion'] === 'factura') {
                                         <td><?php echo htmlspecialchars($producto['categoria_nombre']); ?></td>
                                         <td class="acciones">
                                             <a href="producto_editar.php?id=<?php echo $producto['producto_id']; ?>" 
-                                               class="btn-small">Editar</a>
+                                               class="btn btn-small btn-warning">Editar</a>
                                             <a href="producto_eliminar.php?id=<?php echo $producto['producto_id']; ?>" 
-                                               class="btn-small btn-danger"
+                                               class="btn btn-small btn-danger"
                                                onclick="return confirm('¿Está seguro que desea eliminar este producto?');">Eliminar</a>
                                         </td>
                                     </tr>
