@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Restablecer Contraseña</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input[type="email"] { width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; }
+        input[type="submit"] { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Restablecer Contraseña</h2>
+        <p>Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
+        <form action="enviar_enlace.php" method="POST">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <input type="submit" value="Enviar enlace de restablecimiento">
+        </form>
+    </div>
+</body>
+</html>
